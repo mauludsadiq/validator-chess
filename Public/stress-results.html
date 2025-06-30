@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📊 Stress Test Results</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>📊 Stress Test Results</h1>
+  <div class="stats">
+    <p>Players Simulated: <span id="players">0</span></p>
+    <p>Spectators Simulated: <span id="spectators">0</span></p>
+    <p>Total Progress Updates: <span id="updates">0</span></p>
+    <p>Updates/Sec: <span id="throughput">0</span></p>
+    <p>Avg. Completion Time: <span id="avg-time">0s</span></p>
+    <p>Errors Encountered: <span id="errors">0</span></p>
+    <p>Test Duration: <span id="duration">0s</span></p>
+  </div>
+  <h2>Player Performance</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Player ID</th>
+        <th>Mate Type</th>
+        <th>Completion Time</th>
+        <th>Progress Updates</th>
+      </tr>
+    </thead>
+    <tbody id="player-table"></tbody>
+  </table>
+  <h2>Back to <a href="index.html">Race</a></h2>
+  <script>
+    fetch('/api/stress-results?raceCode=test-stress')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('players').textContent = data.players;
+        document.getElementById('spectators').textContent = data.spectators;
+        document.getElementById('updates').textContent = data.progressUpdates;
+        document.getElementById('throughput').textContent = data.throughput.toFixed(2);
+        document.getElementById('avg-time').textContent = `${data.avgCompletionTime.toFixed(2)}s`;
+        document.getElementById('errors').textContent = data.errors;
+        document.getElementById('duration').textContent = `${data.duration.toFixed(2)}s`;
+        const tbody = document.getElementById('player-table');
+        data.playerDetails.forEach(p => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${p.playerId}</td><td>${p.mateType}</td><td>${p.completionTime ? (p.completionTime/1000).toFixed(2)+'s' : 'DNF'}</td><td>${p.updates}</td>`;
+          tbody.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>
