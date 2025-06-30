@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📊 Validator Chess: Analytics</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>📊 Validator Chess: Analytics</h1>
+  <div class="analytics-grid">
+    <div>
+      <h2>Mate Choice Distribution</h2>
+      <canvas id="mateDistributionChart"></canvas>
+    </div>
+    <div>
+      <h2>Mate Win Rates</h2>
+      <canvas id="winRateChart"></canvas>
+    </div>
+    <div>
+      <h2>Average Completion Times</h2>
+      <canvas id="completionTimeChart"></canvas>
+    </div>
+    <div>
+      <h2>Recent Tournament Champions</h2>
+      <table id="championTable">
+        <thead>
+          <tr>
+            <th>Tournament ID</th>
+            <th>Champion</th>
+            <th>Final Mate</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="analytics.js"></script>
+</body>
+</html>
