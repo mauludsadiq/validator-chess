@@ -1,4 +1,5 @@
 {
+  "framework": "static",
   "redirects": [
     {
       "source": "/",
